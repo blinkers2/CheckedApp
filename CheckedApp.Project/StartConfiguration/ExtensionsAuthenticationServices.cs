@@ -17,9 +17,9 @@ public static class ExtensionsAuthenticationServices
         {
             options.TokenValidationParameters = new TokenValidationParameters
             {
-                ValidIssuer = configuration["JwtSettings:Issuer"],
-                ValidAudience = configuration["JwtSettings:Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]!)),
+                ValidIssuer = "CheckedApp",
+                ValidAudience = "CheckedApp",
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuperTajnyKluczDoTajnejAplikacji666")),
                 ClockSkew = TimeSpan.Zero,
                 ValidateIssuer = true,
                 ValidateAudience = true,
