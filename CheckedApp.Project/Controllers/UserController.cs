@@ -33,7 +33,7 @@ namespace CheckedAppProject.API.Controllers
                 : Ok(userData);
             }catch (Exception ex){
                 _logger.LogError(ex, $"An error occurred while getting data of user with ID {id}");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ex.Message);
             }
         } 
 
