@@ -7,6 +7,7 @@ namespace CheckedAppProject.API.StartConfiguration
     {
         public static void ConfigureServices(WebApplicationBuilder builder)
         {
+            builder.Services.ConfigureCors(builder.Configuration);
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddAppServices();
@@ -16,13 +17,13 @@ namespace CheckedAppProject.API.StartConfiguration
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddSwaggerGen();
             builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerConfiguration>();
-            builder.Services.ConfigureCors(builder.Configuration);
             builder.Services.ConfigureDbContext(builder.Configuration);
             builder.Services.ConfigureIdentity();
             builder.Services.AddTransient<MigrationCD>();
         }
         public static void ConfigureApp(WebApplication app)
         {
+            app.UseCors();
             var scope = app.Services.CreateScope();
             var migrationCD = scope.ServiceProvider.GetRequiredService<MigrationCD>();
             migrationCD.MigrationCheck();
@@ -34,7 +35,6 @@ namespace CheckedAppProject.API.StartConfiguration
                 app.UseSwaggerUI();
             }
             app.UseHttpsRedirection();
-            app.UseCors();
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
