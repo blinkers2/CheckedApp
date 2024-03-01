@@ -21,7 +21,7 @@ public static class ExtensionsAuthenticationServices
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidIssuer = issuer,
-                ValidAudience = aduience,
+                ValidAudience = audience,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
                 ClockSkew = TimeSpan.Zero,
                 ValidateIssuer = true,
