@@ -8,6 +8,9 @@ public static class ExtensionsAuthenticationServices
 {
     public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
+        var issuer = configuration["JwtSettings:Issuer"];
+        var audience = configuration["JwtSettings:Audience"];
+        var key = configuration["JwtSettings:Key"];
         services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -17,9 +20,9 @@ public static class ExtensionsAuthenticationServices
         {
             options.TokenValidationParameters = new TokenValidationParameters
             {
-                ValidIssuer = "CheckedApp",
-                ValidAudience = "CheckedApp",
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SuperTajnyKluczDoTajnejAplikacji666")),
+                ValidIssuer = issuer,
+                ValidAudience = aduience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
                 ClockSkew = TimeSpan.Zero,
                 ValidateIssuer = true,
                 ValidateAudience = true,
